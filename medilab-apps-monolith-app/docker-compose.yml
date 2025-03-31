@@ -1,0 +1,35 @@
+version: '3.8'
+#version: '3.9'
+services:
+   #medilab-monolith-app
+  medilab-monolith-app-service: 
+    container_name: medilab-monolith-app
+    image: medilab-monolith-app-image
+    restart: always
+    ports:
+      - 5010:8087
+    environment:
+      - MEDILAB_MONOLITH_APP_DB_USER_NAME=root
+      - MEDILAB_MONOLITH_APP_DB_PASSWORD=root
+      - MEDILAB_MONOLITH_APP_DB_TYPE=mysql
+      - MEDILAB_MONOLITH_APP_DB_CONTAINER_NAME=medilab-monolith-app-db-service
+      - MEDILAB_MONOLITH_APP_DB_PORT=3306
+      - MEDILAB_MONOLITH_APP_DB=medilab-preclinic-monolith
+
+   #monolith ap db service
+  medilab-monolith-app-db-service:
+    container_name: medilab-monolith-app-db
+    volumes:
+      #- /opt/docker_files/medilab-monolith-app:/var/lib/medilab-monolith-app-db
+      - medilab-preclinic-db-storage:/var/lib/mysql
+    image: mysql
+    ports:
+      - 3306:3306
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=medilab-preclinic-monolith 
+volumes:
+ medilab-preclinic-db-storage: 
+  external: true
+    
+    
