@@ -20,6 +20,13 @@ spring:
       prefix: /WEB-INF/views/
       suffix: .jsp
 
+  security:
+    user:
+      name: admin
+      password: admin
+      roles:
+        - DOCTOR
+
 logging:
   level:
     org:
