@@ -32,3 +32,12 @@ logging:
     org:
       springframework:
         security: trace
+
+acma:
+   password:
+      policies:
+         min-length: ${ACMA_PWD_MIN_LENGTH:8}
+         upperCaseRegEx: ${ACMA_PWD_UPPERCASE_REGEX:.*[A-Z].*}
+         numbersRegEx: ${ACMA_PWD_NUMBERS_REGEX:.*[0-9].*}
+         specialCharsRegEx: ${ACMA_PWD_SPECIAL_CHARS_REGEX:.*[!-\\/:-@[-`{-~]].*}
+
