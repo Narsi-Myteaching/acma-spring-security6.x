@@ -1,5 +1,6 @@
 package com.medilab.preclinic.config;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -18,6 +19,9 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @Configuration
 @EnableMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
 public class AppSecurityConfig {
+
+    @Autowired
+    private AcmaAccessDeniedHandler accessDeniedHandler;
 
 //    @Bean
 //    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -66,6 +70,7 @@ public class AppSecurityConfig {
                 .requestMatchers("/self-service/**","/assets/**").permitAll()
                 .anyRequest().authenticated());
 
+        http.exceptionHandling((exception) -> exception.accessDeniedHandler(accessDeniedHandler));
 
         http.authenticationProvider(customAuthnProvider()).formLogin(withDefaults());
         http.authenticationProvider(customAuthnProvider()).httpBasic(withDefaults());

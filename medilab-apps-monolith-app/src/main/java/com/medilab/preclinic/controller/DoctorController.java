@@ -95,4 +95,10 @@ public class DoctorController {
 	public String scheduleDoctor() {
 		return "doctor/schedules";
 	}
+
+	@RequestMapping("/AuthzError")
+	public String getErrorPage(Model model) {
+		model.addAttribute("authzErrorMsg", "Not Authrized to do this Action");
+		return "doctor/authzError";
+	}
 }
