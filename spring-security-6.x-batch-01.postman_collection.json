@@ -1,0 +1,302 @@
+{
+	"info": {
+		"_postman_id": "9dea726e-52cf-49eb-8777-2ad69d5ddc7b",
+		"name": "spring-security-6.x-batch-01",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29396204"
+	},
+	"item": [
+		{
+			"name": "client_credentials_grant_type",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ZlNjXQ50Wu4FBTdze9BB5STi2EeLeSZT",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "acma-cc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "grant_type",
+						"value": "client_credentials",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:4040/realms/acma/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4040",
+					"path": [
+						"realms",
+						"acma",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "password_grant_type",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "ZlNjXQ50Wu4FBTdze9BB5STi2EeLeSZT",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "acma-cc",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "acma-cc",
+							"type": "text",
+							"disabled": true
+						},
+						{
+							"key": "username",
+							"value": "User01",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testUser@123",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "profile openid",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:4040/realms/acma/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4040",
+					"path": [
+						"realms",
+						"acma",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "password_grant_type Copy",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "CFAygob59sTdDbAE3XyqNvx0up5OizJW",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "acma-ui-app",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "acma-ui-app",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "User01",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "testUser@123",
+							"type": "text"
+						},
+						{
+							"key": "scope",
+							"value": "profile",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:4040/realms/acma/protocol/openid-connect/token",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4040",
+					"path": [
+						"realms",
+						"acma",
+						"protocol",
+						"openid-connect",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "token-introspect",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJSOVlxNmxpRjc0c2dlRXV3UVhhREsyM0NjVUF6MXFMN0wyallPZFJJcm8wIn0.eyJleHAiOjE3NDUzODAzNDEsImlhdCI6MTc0NTM4MDA0MSwianRpIjoib25ydHJvOjc5ODFkOGQ0LTUwMTUtNDM3ZS05Y2M5LWNjZGRlM2IyZmYwNiIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6NDA0MC9yZWFsbXMvYWNtYSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI0OGVjMjU1OS0xYTgzLTQ4MmItYTI1MC1kN2U2OTVmMWRkMTUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhY21hLWNjIiwic2lkIjoiY2U4MTZiNzItZWUyZC00YTVlLWI1NmUtZTQ2Y2RiM2FjNDFmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWFjbWEiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlVzZXIwMSBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjAxIiwiZ2l2ZW5fbmFtZSI6IlVzZXIwMSIsImZhbWlseV9uYW1lIjoiVGVzdCIsImVtYWlsIjoidXNlcjAxQHlvcG1haWwuY29tIn0.pFtsUyXfnGWfNTNDeIkJ5SFhJnOHApwFBlktVPsFeJ6NV5JtrU7K4nS1rz6jD7arI2ZGvgbW_KVtH-1f_qMEM1bCrsuazRQ4KIJkqj-E0PCpmBZPedXvN4Bs6dQKGYGNgrKfdm_-xsBHlmxEgnnN9V4TkVfbUswdNUDjVMkuoqgziJNd_JKyn0vixyr9cMTuWhjF4GeqQ9fbpj7lGOFjsi-I3W7BGaQCgwvEW2_K1UzJM_fMCwZrAOy0vyoibRD-ru5V6R1VhQZEMxR0dZw3cwpHYwr1asZBFApMMBKEJVFjrfGeriRjLs3hY49Oo8tstDbO4HjXRDOvMkjVreqZhg",
+							"type": "text"
+						},
+						{
+							"key": "client_id",
+							"value": "acma-cc",
+							"type": "text"
+						},
+						{
+							"key": "client_secret",
+							"value": "ZlNjXQ50Wu4FBTdze9BB5STi2EeLeSZT",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:4040/realms/acma/protocol/openid-connect/token/introspect",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4040",
+					"path": [
+						"realms",
+						"acma",
+						"protocol",
+						"openid-connect",
+						"token",
+						"introspect"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "userinfo-endpoint",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJSOVlxNmxpRjc0c2dlRXV3UVhhREsyM0NjVUF6MXFMN0wyallPZFJJcm8wIn0.eyJleHAiOjE3NDUzODAzNDEsImlhdCI6MTc0NTM4MDA0MSwianRpIjoib25ydHJvOjc5ODFkOGQ0LTUwMTUtNDM3ZS05Y2M5LWNjZGRlM2IyZmYwNiIsImlzcyI6Imh0dHA6Ly8xMjcuMC4wLjE6NDA0MC9yZWFsbXMvYWNtYSIsImF1ZCI6ImFjY291bnQiLCJzdWIiOiI0OGVjMjU1OS0xYTgzLTQ4MmItYTI1MC1kN2U2OTVmMWRkMTUiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhY21hLWNjIiwic2lkIjoiY2U4MTZiNzItZWUyZC00YTVlLWI1NmUtZTQ2Y2RiM2FjNDFmIiwiYWNyIjoiMSIsImFsbG93ZWQtb3JpZ2lucyI6WyIqIl0sInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJkZWZhdWx0LXJvbGVzLWFjbWEiLCJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwibmFtZSI6IlVzZXIwMSBUZXN0IiwicHJlZmVycmVkX3VzZXJuYW1lIjoidXNlcjAxIiwiZ2l2ZW5fbmFtZSI6IlVzZXIwMSIsImZhbWlseV9uYW1lIjoiVGVzdCIsImVtYWlsIjoidXNlcjAxQHlvcG1haWwuY29tIn0.pFtsUyXfnGWfNTNDeIkJ5SFhJnOHApwFBlktVPsFeJ6NV5JtrU7K4nS1rz6jD7arI2ZGvgbW_KVtH-1f_qMEM1bCrsuazRQ4KIJkqj-E0PCpmBZPedXvN4Bs6dQKGYGNgrKfdm_-xsBHlmxEgnnN9V4TkVfbUswdNUDjVMkuoqgziJNd_JKyn0vixyr9cMTuWhjF4GeqQ9fbpj7lGOFjsi-I3W7BGaQCgwvEW2_K1UzJM_fMCwZrAOy0vyoibRD-ru5V6R1VhQZEMxR0dZw3cwpHYwr1asZBFApMMBKEJVFjrfGeriRjLs3hY49Oo8tstDbO4HjXRDOvMkjVreqZhg",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:4040/realms/acma/protocol/openid-connect/userinfo",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "4040",
+					"path": [
+						"realms",
+						"acma",
+						"protocol",
+						"openid-connect",
+						"userinfo"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

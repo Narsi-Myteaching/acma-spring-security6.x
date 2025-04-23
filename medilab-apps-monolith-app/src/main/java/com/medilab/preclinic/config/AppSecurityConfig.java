@@ -3,14 +3,19 @@ package com.medilab.preclinic.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.sql.DataSource;
 
@@ -20,9 +25,11 @@ import static org.springframework.security.config.Customizer.withDefaults;
 @EnableMethodSecurity(prePostEnabled = true,securedEnabled = true,jsr250Enabled = true)
 public class AppSecurityConfig {
 
-    @Autowired
-    private AcmaAccessDeniedHandler accessDeniedHandler;
+    //@Autowired
+    //private AcmaAccessDeniedHandler accessDeniedHandler;
 
+    @Autowired
+    private AcmaVistorsFilter acmaVistorsFilter;
 //    @Bean
 //    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
 ////        http.authorizeHttpRequests((requests) -> requests.anyRequest().authenticated());
@@ -64,16 +71,41 @@ public class AppSecurityConfig {
 //        return http.build();
 //    }
 
+//    @Bean
+//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests((req)->req
+//                .requestMatchers("/self-service/**","/assets/**","/api/**").permitAll()
+//                .requestMatchers(HttpMethod.POST,"/api/**").permitAll()
+//                .anyRequest().authenticated());
+//
+//        http.exceptionHandling((exception) -> exception.accessDeniedHandler(accessDeniedHandler));
+//        http.addFilterBefore(acmaVistorsFilter, UsernamePasswordAuthenticationFilter.class);
+//        //http.authenticationProvider(customAuthnProvider()).formLogin((form)->form.disable());
+//        http.sessionManagement((session)->session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//        http.authenticationProvider(customAuthnProvider()).httpBasic((basic)->basic.disable());
+//        return http.build();
+//    }
+
+//    @Bean
+//    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+//        http.authorizeHttpRequests((req)->req
+//                .requestMatchers(HttpMethod.POST,"/api/authenticate").permitAll()
+//                .anyRequest().authenticated())
+//                .csrf((csrfRef)->csrfRef.disable())
+//                .httpBasic(withDefaults())
+//                .sessionManagement((sessionRef)->sessionRef.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+//        return  http.build();
+//    }
+
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests((req)->req
-                .requestMatchers("/self-service/**","/assets/**").permitAll()
-                .anyRequest().authenticated());
-
-        http.exceptionHandling((exception) -> exception.accessDeniedHandler(accessDeniedHandler));
-
-        http.authenticationProvider(customAuthnProvider()).formLogin(withDefaults());
-        http.authenticationProvider(customAuthnProvider()).httpBasic(withDefaults());
+    public SecurityFilterChain filterChain(HttpSecurity http) throws
+            Exception {
+        http.csrf((csrf) -> csrf.disable())
+                .sessionManagement((sessionManagement) -> sessionManagement.
+                        sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests((authorizeHttpRequests) ->
+                        authorizeHttpRequests.requestMatchers(HttpMethod.POST,
+                                "/api/authenticate").permitAll().anyRequest().authenticated());
         return http.build();
     }
 
