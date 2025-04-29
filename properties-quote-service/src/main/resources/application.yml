@@ -1,0 +1,55 @@
+spring: 
+  application: 
+    name: properties-quote-service
+
+  datasource:
+    driver-class-name: ${APP_DB_DRIVER:com.mysql.cj.jdbc.Driver} 
+    url: jdbc:mysql://${APP_DB_HOST:localhost}:${APP_DB_PORT:3306}/${APP_DB_NAME:propertyQuote-db}
+    username: ${APP_DB_USER:root}
+    password: ${APP_DB_PASSWORD:root}
+     
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      org: 
+        hibernate: 
+          envers: 
+            audit_table_suffix=
+            audit_table_prefix="AU_"
+            revision_field_name=REV_ID
+            revision_type_field_name=REV_TYPE
+            store_data_at_delete=true
+            
+  kafka:
+    bootstrap-servers:
+    - ${BROKER1_HOST:localhost}:${BROKER1_PORT:9092}
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.apache.kafka.common.serialization.StringSerializer
+      
+  security:
+    oauth2:
+       resourceserver:
+            jwt:
+              issuer-uri: http://127.0.0.1:4040/realms/acma
+              jwk-set-uri: http://127.0.0.1:4040/realms/acma/protocol/openid-connect/certs
+          
+server:
+  port: 7102
+
+acma: 
+   properties: 
+            agents: 
+              base-uri: ${AGENTS_MGMT_SVC_BASE_URI:http://localhost:7104} 
+            notifications: 
+              base-uri: ${NOTIFICATIONS_MGMT_SVC_BASE_URI:http://localhost:7105}
+            quote: 
+               expiry: ${QUOTE_EXPIRY_DAYS:60}
+            lead:
+               expiry: ${LEAD_EXPIRY_DAYS:30}
+               topic: ${LEADS_TOPIC_NAME:leads-topic}
+               partitions: ${LEADS_TOPIC_PARTITIONS:1}
+            base-uri: ${PROPERTIES_MGMT_BASE_URI:http://localhost:7101}
+            
