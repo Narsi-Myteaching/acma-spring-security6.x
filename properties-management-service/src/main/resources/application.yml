@@ -9,12 +9,7 @@ spring:
       port: ${PROPERTIES_DB_PORT:27017}
       auto-index-creation: true
       
-  security:
-     oauth2:
-       resourceserver:
-            jwt:
-              issuer-uri: http://127.0.0.1:4040/realms/acma
-              jwk-set-uri: http://127.0.0.1:4040/realms/acma/protocol/openid-connect/certs
+
 
 
 server:

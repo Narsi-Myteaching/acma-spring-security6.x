@@ -40,7 +40,7 @@ public class PropertiesManagementResource {
 	}
 	
 	@CrossOrigin(allowedHeaders = "*")
-	@GetMapping(value = {"/propertyInfo"})
+	@GetMapping(value = {"/propertyInfo","/propertyInfo/"})
 	public ResponseEntity<List<PropertyInfoBean>> getAllPropertiesInfo(){
 		log.info("---Fetching all Properties Information-->");
 		List<PropertyInfoBean> propertiesList = propertyInfoService.getAllProperties();

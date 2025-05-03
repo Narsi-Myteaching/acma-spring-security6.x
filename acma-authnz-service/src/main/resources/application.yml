@@ -1,0 +1,28 @@
+spring:
+  application:
+          name: acma-authnz-service
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+             client-id: acma-cc
+             client-secret: waBS0YSuQH6wOUUgV5EBGv1WhQSZ9hHp
+             authorization-grant-type: authorization_code
+             redirect-uri: "{baseUrl}/login/oauth2/code/"
+             scope:
+               - openid
+        provider:
+          keycloak:
+             authorization-uri: http://localhost:4040/realms/acma/protocol/openid-connect/auth
+             token-uri: http://localhost:4040/realms/acma/protocol/openid-connect/token
+             user-info-uri: http://localhost:4040/realms/acma/protocol/openid-connect/userinfo
+             jwk-set-uri: http://localhost:4040/realms/acma/protocol/openid-connect/certs
+             user-name-attribute: given_name
+
+             
+
+server:
+  port: 9050
+
+

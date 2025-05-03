@@ -1,0 +1,53 @@
+spring: 
+  application: 
+      name: acma-identity-gateway
+      
+
+  cloud:
+    gateway:
+        globalcors:
+         cors-configurations:
+           '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods: "*"
+            allowedHeaders: "*"
+            
+        default-filters:
+          - DedupeResponseHeader=Access-Control-Allow-Credentials Access-Control-Allow-Origin
+        routes: 
+        
+          - id: 01-properties-info-svc-route
+            uri: http://localhost:7101
+            predicates:
+            - Path=/properties
+            filters:
+            - RewritePath=/properties/?(?<segment>.*),/propertyInfo/$\{segment}
+            metadata:
+              cors:
+                allowedOrigins: '*'
+                allowedMethods: '*'
+                allowedHeaders: '*'
+                maxAge: 30
+            
+          - id: 02-properties-quote-svc-route
+            uri: http://localhost:7102
+            predicates:
+            - Path=/quotations
+            filters:
+            - RewritePath=/quotations/?(?<segment>.*), /property-quote/$\{segment}
+                      
+  security:
+     oauth2:
+       resourceserver:
+            jwt:
+              issuer-uri: http://localhost:4040/realms/acma
+              jwk-set-uri: http://localhost:4040/realms/acma/protocol/openid-connect/certs
+
+
+server:
+  port: 7000
+  
+logging:
+  level:
+    '[org.springframework.cloud.gateway]': DEBUG
+    
