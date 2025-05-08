@@ -6,12 +6,16 @@ spring:
       client:
         registration:
           keycloak:
-             client-id: acma-cc
-             client-secret: waBS0YSuQH6wOUUgV5EBGv1WhQSZ9hHp
+             #client-id: acma-cc
+             client-id: oidc-dynamic-client-01
+             #client-secret: waBS0YSuQH6wOUUgV5EBGv1WhQSZ9hHp
              authorization-grant-type: authorization_code
-             redirect-uri: "{baseUrl}/login/oauth2/code/"
+             redirect-uri: "{baseUrl}/login/oauth2/code/keycloak"
              scope:
                - openid
+             require-authorization-consent: true
+             require-proof-key: true
+
         provider:
           keycloak:
              authorization-uri: http://localhost:4040/realms/acma/protocol/openid-connect/auth

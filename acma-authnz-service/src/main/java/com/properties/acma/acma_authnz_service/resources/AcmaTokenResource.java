@@ -101,6 +101,7 @@ public class AcmaTokenResource {
             cookie.setDomain("localhost");
 
             response.addCookie(cookie);
+            response.setHeader("Access-Control-Allow-Origin","true");
 
             response.sendRedirect("http://localhost:3000/dashboard");
         }
